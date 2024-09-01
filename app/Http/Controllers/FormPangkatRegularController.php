@@ -82,101 +82,125 @@ class FormPangkatRegularController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            $request->validate([
+                'nama' => 'required|string',
+                'nip' => 'required|integer',
+                'jabatan' => 'required|string',
+                'unit_kerja' => 'required|string',
+                'nomor_wa' => 'required|string',
+                'doc_suratPengantar' => 'required|mimes:pdf|max:1024',
+                'doc_pangkatTerakhir' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanAtasan' => 'required|mimes:pdf|max:1024',
+                'doc_tandaLulus' => 'required|mimes:pdf|max:1024',
+                'doc_skAlihtugas' => 'required|mimes:pdf|max:1024',
+                'doc_penilaian2022' => 'required|mimes:pdf|max:1024',
+                'doc_penilaian2023' => 'required|mimes:pdf|max:1024',
+                'doc_skCpns' => 'required|mimes:pdf|max:1024',
+                'doc_skPns' => 'required|mimes:pdf|max:1024',
+                'doc_STTPL' => 'required|mimes:pdf|max:1024',
+                'doc_beritaAcarasumpah' => 'required|mimes:pdf|max:1024',
+                'doc_ijazah' => 'required|mimes:pdf|max:1024',
+                'doc_transkrip' => 'required|mimes:pdf|max:1024',
+            ]);
 
-        $dataUpload = new Form_regular;
-        $dataUpload->user_id = Auth::id();
-        $dataUpload->periode = $request->periode;
-        $dataUpload->nama = $request->nama;
-        $dataUpload->nip = $request->nip;
-        $dataUpload->golongan = $request->golongan;
-        $dataUpload->jabatan = $request->jabatan;
-        $dataUpload->unit_kerja = $request->unit_kerja;
-        $dataUpload->date = $request->date;
-        $dataUpload->nomor_wa = $request->nomor_wa;
+            $dataUpload = new Form_regular;
+            $dataUpload->user_id = Auth::id();
+            $dataUpload->periode = $request->periode;
+            $dataUpload->nama = $request->nama;
+            $dataUpload->nip = $request->nip;
+            $dataUpload->golongan = $request->golongan;
+            $dataUpload->jabatan = $request->jabatan;
+            $dataUpload->unit_kerja = $request->unit_kerja;
+            $dataUpload->date = $request->date;
+            $dataUpload->nomor_wa = $request->nomor_wa;
 
-        if ($request->hasFile('doc_suratPengantar')) {
-            $upload = $request->file('doc_suratPengantar');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_suratPengantar = $nameFile;
-        }
+            if ($request->hasFile('doc_suratPengantar')) {
+                $upload = $request->file('doc_suratPengantar');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_suratPengantar = $nameFile;
+            }
 
-        if ($request->hasFile('doc_pangkatTerakhir')) {
-            $upload = $request->file('doc_pangkatTerakhir');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_pangkatTerakhir = $nameFile;
-        }
-        if ($request->hasFile('doc_jabatanAtasan')) {
-            $upload = $request->file('doc_jabatanAtasan');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_jabatanAtasan = $nameFile;
-        }
-        if ($request->hasFile('doc_tandaLulus')) {
-            $upload = $request->file('doc_tandaLulus');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_tandaLulus = $nameFile;
-        }
-        if ($request->hasFile('doc_skAlihtugas')) {
-            $upload = $request->file('doc_skAlihtugas');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_skAlihtugas = $nameFile;
-        }
-        if ($request->hasFile('doc_penilaian2022')) {
-            $upload = $request->file('doc_penilaian2022');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_penilaian2022 = $nameFile;
-        }
-        if ($request->hasFile('doc_penilaian2023')) {
-            $upload = $request->file('doc_penilaian2023');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_penilaian2023 = $nameFile;
-        }
-        if ($request->hasFile('doc_skCpns')) {
-            $upload = $request->file('doc_skCpns');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_skCpns = $nameFile;
-        }
-        if ($request->hasFile('doc_skPns')) {
-            $upload = $request->file('doc_skPns');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_skPns = $nameFile;
-        }
-        if ($request->hasFile('doc_STTPL')) {
-            $upload = $request->file('doc_STTPL');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_STTPL = $nameFile;
-        }
-        if ($request->hasFile('doc_beritaAcarasumpah')) {
-            $upload = $request->file('doc_beritaAcarasumpah');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_beritaAcarasumpah = $nameFile;
-        }
-        if ($request->hasFile('doc_ijazah')) {
-            $upload = $request->file('doc_ijazah');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_ijazah = $nameFile;
-        }
-        if ($request->hasFile('doc_transkrip')) {
-            $upload = $request->file('doc_transkrip');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentRegular'), $nameFile);
-            $dataUpload->doc_transkrip = $nameFile;
-        }
+            if ($request->hasFile('doc_pangkatTerakhir')) {
+                $upload = $request->file('doc_pangkatTerakhir');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_pangkatTerakhir = $nameFile;
+            }
+            if ($request->hasFile('doc_jabatanAtasan')) {
+                $upload = $request->file('doc_jabatanAtasan');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_jabatanAtasan = $nameFile;
+            }
+            if ($request->hasFile('doc_tandaLulus')) {
+                $upload = $request->file('doc_tandaLulus');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_tandaLulus = $nameFile;
+            }
+            if ($request->hasFile('doc_skAlihtugas')) {
+                $upload = $request->file('doc_skAlihtugas');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_skAlihtugas = $nameFile;
+            }
+            if ($request->hasFile('doc_penilaian2022')) {
+                $upload = $request->file('doc_penilaian2022');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_penilaian2022 = $nameFile;
+            }
+            if ($request->hasFile('doc_penilaian2023')) {
+                $upload = $request->file('doc_penilaian2023');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_penilaian2023 = $nameFile;
+            }
+            if ($request->hasFile('doc_skCpns')) {
+                $upload = $request->file('doc_skCpns');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_skCpns = $nameFile;
+            }
+            if ($request->hasFile('doc_skPns')) {
+                $upload = $request->file('doc_skPns');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_skPns = $nameFile;
+            }
+            if ($request->hasFile('doc_STTPL')) {
+                $upload = $request->file('doc_STTPL');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_STTPL = $nameFile;
+            }
+            if ($request->hasFile('doc_beritaAcarasumpah')) {
+                $upload = $request->file('doc_beritaAcarasumpah');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_beritaAcarasumpah = $nameFile;
+            }
+            if ($request->hasFile('doc_ijazah')) {
+                $upload = $request->file('doc_ijazah');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_ijazah = $nameFile;
+            }
+            if ($request->hasFile('doc_transkrip')) {
+                $upload = $request->file('doc_transkrip');
+                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                $upload->move(public_path('assets/documentRegular'), $nameFile);
+                $dataUpload->doc_transkrip = $nameFile;
+            }
 
-        $dataUpload->save();
+            $dataUpload->save();
 
-        return redirect('/table-regular')->with('success', 'Data baru berhasil ditambahkan!');
+            return redirect('/table-regular')->with('success', 'Data baru berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Silahkan melengkapi data anda');
+        }
     }
 
     /**

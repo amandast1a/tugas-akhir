@@ -56,147 +56,174 @@ class FormJabatanStrukturalController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
-    {
-        $user = Auth::user();
-        $notifications = Notification::where('user_id', $user->id)->where('read', false)->get();
-        $unreadCount = $notifications->where('read', false)->count();
+            {
+                $user = Auth::user();
+                $notifications = Notification::where('user_id', $user->id)->where('read', false)->get();
+                $unreadCount = $notifications->where('read', false)->count();
 
-        $activePage = Pages::where('type', 'formulir usulan kenaikan pangkat struktural')
-                           ->where('level', $user->level)
-                           ->where('is_active', true)
-                           ->first();
+                $activePage = Pages::where('type', 'formulir usulan kenaikan pangkat struktural')
+                                ->where('level', $user->level)
+                                ->where('is_active', true)
+                                ->first();
 
-        if ($activePage) {
-            $golongan = Golongan::all();
-            $periode = Periode::all();
-            return view('application.crud-form-struktural.form-jabatan-struktural', compact('user', 'notifications', 'unreadCount', 'periode', 'golongan'));
-        } else {
-            return view('application.error-page.error');
-        }
-    }
+                if ($activePage) {
+                    $golongan = Golongan::all();
+                    $periode = Periode::all();
+                    return view('application.crud-form-struktural.form-jabatan-struktural', compact('user', 'notifications', 'unreadCount', 'periode', 'golongan'));
+                } else {
+                    return view('application.error-page.error');
+                }
+            }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+            /**
+             * Store a newly created resource in storage.
+             */
+
     public function store(Request $request)
     {
+        try {
+            $request->valiate([
+                'nama' => 'required|string',
+                'nip' => 'required|integer',
+                'jabatan' => 'required|string',
+                'unit_kerja' => 'required|string',
+                'nomor_wa' => 'required|string',
+                'doc_suratPengantar' => 'required|mimes:pdf|max:1024',
+                'doc_pangkatTerakhir' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanAtasan' => 'required|mimes:pdf|max:1024',
+                'doc_penilaian2022' => 'required|mimes:pdf|max:1024',
+                'doc_penilaian2023' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanLama' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanBaru' => 'required|mimes:pdf|max:1024',
+                'doc_beritaAcarasumpahlama' => 'required|mimes:pdf|max:1024',
+                'doc_beritaAcarasumpahbaru' => 'required|mimes:pdf|max:1024',
+                'doc_pernyataanPelantikanlama' => 'required|mimes:pdf|max:1024',
+                'doc_pernyataanPelantikanlama' => 'required|mimes:pdf|max:1024',
+                'doc_riwayatAtasan' => 'required|mimes:pdf|max:1024',
+                'doc_ujianDinas' => 'required|mimes:pdf|max:1024',
+                'doc_skAlihtugas' => 'required|mimes:pdf|max:1024',
+            ]);
 
-        $dataUpload = new Form_struktural;
-        $dataUpload->user_id = Auth::id();
-        $dataUpload->periode = $request->periode;
-        $dataUpload->nama = $request->nama;
-        $dataUpload->nip = $request->nip;
-        $dataUpload->golongan = $request->golongan;
-        $dataUpload->jabatan = $request->jabatan;
-        $dataUpload->unit_kerja = $request->unit_kerja;
-        $dataUpload->date = $request->date;
-        $dataUpload->nomor_wa = $request->nomor_wa;
+                $dataUpload = new Form_struktural;
+                $dataUpload->user_id = Auth::id();
+                $dataUpload->periode = $request->periode;
+                $dataUpload->nama = $request->nama;
+                $dataUpload->nip = $request->nip;
+                $dataUpload->golongan = $request->golongan;
+                $dataUpload->jabatan = $request->jabatan;
+                $dataUpload->unit_kerja = $request->unit_kerja;
+                $dataUpload->date = $request->date;
+                $dataUpload->nomor_wa = $request->nomor_wa;
 
-        // Handle each file upload individually
-        if ($request->hasFile('doc_suratPengantar')) {
-            $upload = $request->file('doc_suratPengantar');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_suratPengantar = $nameFile;
+                // Handle each file upload individually
+                if ($request->hasFile('doc_suratPengantar')) {
+                    $upload = $request->file('doc_suratPengantar');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_suratPengantar = $nameFile;
+                }
+
+                if ($request->hasFile('doc_pangkatTerakhir')) {
+                    $upload = $request->file('doc_pangkatTerakhir');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_pangkatTerakhir = $nameFile;
+                }
+
+                if ($request->hasFile('doc_jabatanAtasan')) {
+                    $upload = $request->file('doc_jabatanAtasan');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_jabatanAtasan = $nameFile;
+                }
+
+                if ($request->hasFile('doc_penilaian2022')) {
+                    $upload = $request->file('doc_penilaian2022');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_penilaian2022 = $nameFile;
+                }
+
+                if ($request->hasFile('doc_penilaian2023')) {
+                    $upload = $request->file('doc_penilaian2023');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_penilaian2023 = $nameFile;
+                }
+
+                if ($request->hasFile('doc_jabatanLama')) {
+                    $upload = $request->file('doc_jabatanLama');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_jabatanLama = $nameFile;
+                }
+
+                if ($request->hasFile('doc_jabatanBaru')) {
+                    $upload = $request->file('doc_jabatanBaru');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_jabatanBaru = $nameFile;
+                }
+
+                if ($request->hasFile('doc_beritaAcarasumpahlama')) {
+                    $upload = $request->file('doc_beritaAcarasumpahlama');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_beritaAcarasumpahlama = $nameFile;
+                }
+
+                if ($request->hasFile('doc_beritaAcarasumpahbaru')) {
+                    $upload = $request->file('doc_beritaAcarasumpahbaru');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_beritaAcarasumpahbaru = $nameFile;
+                }
+
+                if ($request->hasFile('doc_pernyataanPelantikanlama')) {
+                    $upload = $request->file('doc_pernyataanPelantikanlama');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_pernyataanPelantikanlama = $nameFile;
+                }
+
+                if ($request->hasFile('doc_pernyataanPelantikanbaru')) {
+                    $upload = $request->file('doc_pernyataanPelantikanbaru');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_pernyataanPelantikanbaru = $nameFile;
+                }
+
+                if ($request->hasFile('doc_riwayatAtasan')) {
+                    $upload = $request->file('doc_riwayatAtasan');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_riwayatAtasan = $nameFile;
+                }
+
+                if ($request->hasFile('doc_ujianDinas')) {
+                    $upload = $request->file('doc_ujianDinas');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_ujianDinas = $nameFile;
+                }
+
+                if ($request->hasFile('doc_skAlihtugas')) {
+                    $upload = $request->file('doc_skAlihtugas');
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->doc_skAlihtugas = $nameFile;
+                }
+
+                $dataUpload->save();
+
+                return redirect('/table-jabatan-struktural')->with('success', 'Data baru berhasil ditambahkan!');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Silahkan melengkapi data anda');
+                }
         }
 
-        if ($request->hasFile('doc_pangkatTerakhir')) {
-            $upload = $request->file('doc_pangkatTerakhir');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_pangkatTerakhir = $nameFile;
-        }
-
-        if ($request->hasFile('doc_jabatanAtasan')) {
-            $upload = $request->file('doc_jabatanAtasan');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_jabatanAtasan = $nameFile;
-        }
-
-        if ($request->hasFile('doc_penilaian2022')) {
-            $upload = $request->file('doc_penilaian2022');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_penilaian2022 = $nameFile;
-        }
-
-        if ($request->hasFile('doc_penilaian2023')) {
-            $upload = $request->file('doc_penilaian2023');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_penilaian2023 = $nameFile;
-        }
-
-        if ($request->hasFile('doc_jabatanLama')) {
-            $upload = $request->file('doc_jabatanLama');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_jabatanLama = $nameFile;
-        }
-
-        if ($request->hasFile('doc_jabatanBaru')) {
-            $upload = $request->file('doc_jabatanBaru');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_jabatanBaru = $nameFile;
-        }
-
-        if ($request->hasFile('doc_beritaAcarasumpahlama')) {
-            $upload = $request->file('doc_beritaAcarasumpahlama');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_beritaAcarasumpahlama = $nameFile;
-        }
-
-        if ($request->hasFile('doc_beritaAcarasumpahbaru')) {
-            $upload = $request->file('doc_beritaAcarasumpahbaru');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_beritaAcarasumpahbaru = $nameFile;
-        }
-
-        if ($request->hasFile('doc_pernyataanPelantikanlama')) {
-            $upload = $request->file('doc_pernyataanPelantikanlama');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_pernyataanPelantikanlama = $nameFile;
-        }
-
-        if ($request->hasFile('doc_pernyataanPelantikanbaru')) {
-            $upload = $request->file('doc_pernyataanPelantikanbaru');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_pernyataanPelantikanbaru = $nameFile;
-        }
-
-        if ($request->hasFile('doc_riwayatAtasan')) {
-            $upload = $request->file('doc_riwayatAtasan');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_riwayatAtasan = $nameFile;
-        }
-
-        if ($request->hasFile('doc_ujianDinas')) {
-            $upload = $request->file('doc_ujianDinas');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_ujianDinas = $nameFile;
-        }
-
-        if ($request->hasFile('doc_skAlihtugas')) {
-            $upload = $request->file('doc_skAlihtugas');
-            $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-            $upload->move(public_path('assets/documentStruktural'), $nameFile);
-            $dataUpload->doc_skAlihtugas = $nameFile;
-        }
-
-        $dataUpload->save();
-
-        return redirect('/table-jabatan-struktural')->with('success', 'Data baru berhasil ditambahkan!');
-
-    }
 
     /**
      * Display the specified resource.
@@ -324,83 +351,83 @@ class FormJabatanStrukturalController extends Controller
         $user = Auth::user();
         $form = Form_struktural::find($id);
         $notifications = Notification::where('user_id', $user->id)->where('read', false)->get();
-        $unreadCount = $notifications->where('read', false)->count();
+            $unreadCount = $notifications->where('read', false)->count();
 
-        $activePage = Pages::where('type', 'formulir usulan kenaikan pangkat struktural')
-                           ->where('level', $user->level)
-                           ->where('is_active', true)
-                           ->first();
+            $activePage = Pages::where('type', 'formulir usulan kenaikan pangkat struktural')
+                            ->where('level', $user->level)
+                            ->where('is_active', true)
+                            ->first();
 
-        if ($activePage) {
-            $golongan = Golongan::all();
-            $periode = Periode::all();
-            return view('application.crud-form-struktural.edit-form', compact('form', 'user', 'notifications', 'unreadCount', 'periode', 'golongan'));
-        } else {
-            return view('application.error-page.error');
-        }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-         // Find the existing record by its ID
-         $dataUpload = Form_struktural::findOrFail($id);
-
-         // Update non-file fields
-         $dataUpload->periode = $request->periode;
-         $dataUpload->nama = $request->nama;
-         $dataUpload->nip = $request->nip;
-         $dataUpload->golongan = $request->golongan;
-         $dataUpload->jabatan = $request->jabatan;
-         $dataUpload->unit_kerja = $request->unit_kerja;
-         $dataUpload->date = $request->date;
-         $dataUpload->nomor_wa = $request->nomor_wa;
-         $dataUpload->status = 'Pending';
-
-         // Handle file uploads and update file fields
-         $files = [
-            'doc_suratPengantar' => 'doc_suratPengantar',
-            'doc_pangkatTerakhir' => 'doc_pangkatTerakhir',
-            'doc_jabatanAtasan' => 'doc_jabatanAtasan',
-            'doc_penilaian2022' => 'doc_penilaian2022',
-            'doc_penilaian2023' => 'doc_penilaian2023',
-            'doc_jabatanLama' => 'doc_jabatanLama',
-            'doc_jabatanBaru' => 'doc_jabatanBaru',
-            'doc_beritaAcarasumpahlama' => 'doc_beritaAcarasumpahlama',
-            'doc_beritaAcarasumpahbaru' => 'doc_beritaAcarasumpahbaru',
-            'doc_pernyataanPelantikanlama' => 'doc_pernyataanPelantikanlama',
-            'doc_pernyataanPelantikanbaru' => 'doc_pernyataanPelantikanbaru',
-            'doc_riwayatAtasan' => 'doc_riwayatAtasan',
-            'doc_ujianDinas' => 'doc_ujianDinas',
-            'doc_skAlihtugas' => 'doc_skAlihtugas',
-        ];
-
-        foreach ($files as $inputName => $columnName) {
-            if ($request->hasFile($inputName)) {
-                $upload = $request->file($inputName);
-                $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
-                $upload->move(public_path('assets/documentStruktural'), $nameFile);
-                $dataUpload->$columnName = $nameFile;
+            if ($activePage) {
+                $golongan = Golongan::all();
+                $periode = Periode::all();
+                return view('application.crud-form-struktural.edit-form', compact('form', 'user', 'notifications', 'unreadCount', 'periode', 'golongan'));
+            } else {
+                return view('application.error-page.error');
             }
         }
 
-         // Save the updated record
-         $dataUpload->save();
+        /**
+         * Update the specified resource in storage.
+         */
+        public function update(Request $request, string $id)
+        {
+            // Find the existing record by its ID
+            $dataUpload = Form_struktural::findOrFail($id);
 
-         return redirect('/table-jabtan-struktural')->with('success', 'Data berhasil diperbarui!');
+            // Update non-file fields
+            $dataUpload->periode = $request->periode;
+            $dataUpload->nama = $request->nama;
+            $dataUpload->nip = $request->nip;
+            $dataUpload->golongan = $request->golongan;
+            $dataUpload->jabatan = $request->jabatan;
+            $dataUpload->unit_kerja = $request->unit_kerja;
+            $dataUpload->date = $request->date;
+            $dataUpload->nomor_wa = $request->nomor_wa;
+            $dataUpload->status = 'Pending';
+
+            // Handle file uploads and update file fields
+            $files = [
+                'doc_suratPengantar' => 'doc_suratPengantar',
+                'doc_pangkatTerakhir' => 'doc_pangkatTerakhir',
+                'doc_jabatanAtasan' => 'doc_jabatanAtasan',
+                'doc_penilaian2022' => 'doc_penilaian2022',
+                'doc_penilaian2023' => 'doc_penilaian2023',
+                'doc_jabatanLama' => 'doc_jabatanLama',
+                'doc_jabatanBaru' => 'doc_jabatanBaru',
+                'doc_beritaAcarasumpahlama' => 'doc_beritaAcarasumpahlama',
+                'doc_beritaAcarasumpahbaru' => 'doc_beritaAcarasumpahbaru',
+                'doc_pernyataanPelantikanlama' => 'doc_pernyataanPelantikanlama',
+                'doc_pernyataanPelantikanbaru' => 'doc_pernyataanPelantikanbaru',
+                'doc_riwayatAtasan' => 'doc_riwayatAtasan',
+                'doc_ujianDinas' => 'doc_ujianDinas',
+                'doc_skAlihtugas' => 'doc_skAlihtugas',
+            ];
+
+            foreach ($files as $inputName => $columnName) {
+                if ($request->hasFile($inputName)) {
+                    $upload = $request->file($inputName);
+                    $nameFile = time() . rand(100, 999) . "." . $upload->getClientOriginalExtension();
+                    $upload->move(public_path('assets/documentStruktural'), $nameFile);
+                    $dataUpload->$columnName = $nameFile;
+                }
+            }
+
+            // Save the updated record
+            $dataUpload->save();
+
+            return redirect('/table-jabtan-struktural')->with('success', 'Data berhasil diperbarui!');
+        }
+
+        /**
+         * Remove the specified resource from storage.
+         */
+        public function destroy(string $id)
+        {
+            $form = Form_struktural::findOrFail($id);
+
+            $form->delete();
+
+            return redirect()->back()->with('success', 'Data berhasil dihapus.');
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $form = Form_struktural::findOrFail($id);
-
-        $form->delete();
-
-        return redirect()->back()->with('success', 'Data berhasil dihapus.');
-    }
-}

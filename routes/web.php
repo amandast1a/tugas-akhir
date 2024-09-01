@@ -21,6 +21,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\FormPangkatijazahController;
 use App\Http\Controllers\SearchController;
 use Faker\Guesser\Name;
+use App\Http\Controllers\FileUploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,6 +157,8 @@ Route::middleware('auth')->group(function () {
 
 
         // form jabatan regular
+
+        Route::post('/upload', [FileUploadController::class, 'store']);
         Route::get('/form-regular', [FormPangkatRegularController::class, 'create']);
         Route::get('/table-regular', [FormPangkatRegularController::class, 'index']);
         Route::get('/proses-table-regular', [FormPangkatRegularController::class, 'proses']);

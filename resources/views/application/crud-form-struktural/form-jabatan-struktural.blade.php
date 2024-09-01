@@ -50,7 +50,7 @@
                             2. Ketik pada UNIT KERJA tidak boleh di singkat <br>
                             3. upload file maksimal 1 Mb dalam bentuk PDF</h6>
                         <div class="card-body">
-                            <form class="needs-validation" action="{{ route('jabatan.struktural.post') }}" method="POST" enctype="multipart/form-data" novalidate>
+                            <form class="needs-validation" action="{{ route('jabatan.struktural.post') }}" id="formStruktural" method="POST" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="periode">Pilih Periode</label>
@@ -139,71 +139,115 @@
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_suratPengantar">SURAT PENGANTAR (dari Kepala SKPD) file max 1MB</label>
                                     <input type="file" class="form-control" id="doc_suratPengantar" name="doc_suratPengantar" required />
+                                    @error('doc_suratPengantar')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_pangkatTerakhir">SK PANGKAT TERAKHIR</label>
                                     <input type="file" class="form-control" id="doc_pangkatTerakhir" name="doc_pangkatTerakhir" required />
+                                    @error('doc_pangkatTerakhir')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_jabatanAtasan">SK JABATAN ATASAN LANGSUNG</label>
                                     <input type="file" class="form-control" id="doc_jabatanAtasan" name="doc_jabatanAtasan" required />
+                                    @error('doc_jabatanAtasan')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_penilaian2022">PENILAIAN KINERJA 2022</label>
                                     <input type="file" class="form-control" id="doc_penilaian2022" name="doc_penilaian2022" required />
+                                    @error('doc_penilaian2022')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_penilaian2023">PENILAIAN KINERJA 2023</label>
                                     <input type="file" class="form-control" id="doc_penilaian2023" name="doc_penilaian2023" required />
+                                    @error('doc_penilaian2023')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_jabatanLama">DOKUMEN JABATAN LAMA</label>
                                     <input type="file" class="form-control" id="doc_jabatanLama" name="doc_jabatanLama" required />
+                                    @error('doc_jabatanLama')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_jabatanBaru">DOKUMEN JABATAN BARU</label>
                                     <input type="file" class="form-control" id="doc_jabatanBaru" name="doc_jabatanBaru" required />
+                                    @error('doc_jabatanBaru')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_beritaAcarasumpahlama">BERITA ACARA SUMPAH LAMA</label>
                                     <input type="file" class="form-control" id="doc_beritaAcarasumpahlama" name="doc_beritaAcarasumpahlama" required />
+                                    @error('doc_beritaAcarasumpahlama')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_beritaAcarasumpahbaru">BERITA ACARA SUMPAH BARU</label>
                                     <input type="file" class="form-control" id="doc_beritaAcarasumpahbaru" name="doc_beritaAcarasumpahbaru" required />
+                                    @error('doc_beritaAcarasumpahbaru')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_pernyataanPelantikanlama">PERNYATAAN PELANTIKAN LAMA</label>
                                     <input type="file" class="form-control" id="doc_pernyataanPelantikanlama" name="doc_pernyataanPelantikanlama" required />
+                                    @error('doc_pernyataanPelantikanlama')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_pernyataanPelantikanbaru">PERNYATAAN PELANTIKAN BARU</label>
                                     <input type="file" class="form-control" id="doc_pernyataanPelantikanbaru" name="doc_pernyataanPelantikanbaru" required />
+                                    @error('doc_pernyataanPelantikanbaru')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_riwayatAtasan">RIWAYAT ATASAN</label>
                                     <input type="file" class="form-control" id="doc_riwayatAtasan" name="doc_riwayatAtasan" required />
+                                    @error('doc_riwayatAtasan')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_ujianDinas">UJIAN DINAS</label>
                                     <input type="file" class="form-control" id="doc_ujianDinas" name="doc_ujianDinas" required />
-                                </div>
+                                    @error('doc_ujianDinas')
+                                    {{ $message }}
+                                    @enderror</div>
                                 <div class="mb-3">
                                     <label class="form-label" for="doc_skAlihtugas">SK ALIH TUGAS (Jika Ada)</label>
                                     <input type="file" class="form-control" id="doc_skAlihtugas" name="doc_skAlihtugas" required />
+                                    @error('doc_skAlihtugas')
+                                    {{ $message }}
+                                    @enderror
                                 </div>
+
+
                                 <div class="row">
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary submit">Submit</button>
+                                        <button type="button" class="btn btn-secondary" onclick="clearForm()">Reset</button>
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                     </div>
                 </div>
 
             </div>
-
 
 
 
@@ -265,6 +309,52 @@
             }
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const formName = document.querySelector('form').getAttribute('id') || 'formStruktural';
+            const formFields = [
+                "periode", "nama", "nip", "golongan", "jabatan", "date",
+                "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_PangkatTerakhir",
+                "doc_jabatanAtasan", "doc_penilaian2022", "doc_penilaian2023",
+                "doc_jabatanLama", "doc_jabatanBaru", "doc_beritaAcarasumpahlama",
+                "doc_beritaAcarasumpahbaru", "doc_pernyataanPelantikanlama",
+                "doc_pernyataanPelantikanbaru", "doc_riwayatAtasan", "doc_ujianDinas",
+                "doc_skAlihtugas",
+
+            ];
+
+            formFields.forEach(field => {
+                const input = document.querySelector(`[name="${field}"]`);
+
+                if (input) {
+                    input.value = localStorage.getItem(`${formName}_${field}`) || input.value;
+
+                    input.addEventListener("input", () => {
+                        localStorage.setItem(`${formName}_${field}`, input.value);
+                    });
+                }
+            });
+        });
+
+        function clearForm() {
+            const formFields = [
+                "periode", "nama", "nip", "golongan", "jabatan", "date",
+                "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_PangkatTerakhir",
+                "doc_jabatanAtasan", "doc_penilaian2022", "doc_penilaian2023",
+                "doc_jabatanLama", "doc_jabatanBaru", "doc_beritaAcarasumpahlama",
+                "doc_beritaAcarasumpahbaru", "doc_pernyataanPelantikanlama",
+                "doc_pernyataanPelantikanbaru", "doc_riwayatAtasan", "doc_ujianDinas",
+                "doc_skAlihtugas",
+
+            ];
+            formFields.forEach(field => {
+                localStorage.removeItem(`${formName}_${field}`);
+                const input = document.querySelector(`[name="${field}"]`);
+                if (input) {
+                    input.value = "";
+                }
+            });
+        }
     </script>
   </body>
 </html>

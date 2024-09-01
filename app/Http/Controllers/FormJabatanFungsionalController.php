@@ -102,6 +102,27 @@ class FormJabatanFungsionalController extends Controller
     public function store(Request $request)
     {
 
+        try {
+            $request->valiate([
+                'nama' => 'required|string',
+                'nip' => 'required|integer',
+                'jabatan' => 'required|string',
+                'unit_kerja' => 'required|string',
+                'nomor_wa' => 'required|string',
+                'doc_suratPengantar' => 'required|mimes:pdf|max:1024',
+                'doc_skPangkat' => 'required|mimes:pdf|max:1024',
+                'doc_pakKonvensional' => 'required|mimes:pdf|max:1024',
+                'doc_pakIntegrasi' => 'required|mimes:pdf|max:1024',
+                'doc_pakKonversi' => 'required|mimes:pdf|max:1024',
+                'doc_penilaian2022' => 'required|mimes:pdf|max:1024',
+                'doc_penilaian2023' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanAtasan' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanLama' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanTerakhir' => 'required|mimes:pdf|max:1024',
+                'doc_pendidik' => 'required|mimes:pdf|max:1024',
+                'doc_uji' => 'required|mimes:pdf|max:1024',
+            ]);
+
         $dataUpload = new Form_jabatan_fungsional;
         $dataUpload->user_id = Auth::id();
         $dataUpload->periode = $request->periode;
@@ -191,7 +212,10 @@ class FormJabatanFungsionalController extends Controller
         $dataUpload->save();
 
         return redirect('/proses-table-jabatan-fungsional')->with('success', 'Data baru berhasil ditambahkan!');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Silahkan melengkapi data anda');
     }
+}
 
     /**
      * Display the specified resource.

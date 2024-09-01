@@ -75,6 +75,38 @@ class FormPangkatIjazahController extends Controller
      */
     public function store(Request $request)
     {
+
+        try {
+            $request->validate([
+                'nama' => 'required|string',
+                'nip' => 'required|integer',
+                'jabatan' => 'required|string',
+                'unit_kerja' => 'required|string',
+                'nomor_wa' => 'required|string',
+                'doc_suratPengantar' => 'required|mimes:pdf|max:1024',
+                'doc_suratPengantar' => 'required|mimes:pdf|max:1024',
+                'doc_pangkatTerakhir' => 'required|mimes:pdf|max:1024',
+                'doc_jabatanAtasan' => 'required|mimes:pdf|max:1024',
+                'doc_penilaian2022'=> 'required|mimes:pdf|max:1024',
+                'doc_penilaian2023' => 'required|mimes:pdf|max:1024',
+                'doc_pakKonvensional' => 'required|mimes:pdf|max:1024',
+                'doc_pakIntegrasi'=> 'required|mimes:pdf|max:1024',
+                'doc_pakKonversi'=> 'required|mimes:pdf|max:1024',
+                'doc_ujiKopetensi'=> 'required|mimes:pdf|max:1024',
+                'doc_izinBelajar'=> 'required|mimes:pdf|max:1024',
+                'doc_uraianTugaslama'=> 'required|mimes:pdf|max:1024',
+                'doc_uraianTugasbaru'=> 'required|mimes:pdf|max:1024',
+                'doc_suratTandakelulusan'=> 'required|mimes:pdf|max:1024',
+                'doc_ijazah'=> 'required|mimes:pdf|max:1024',
+                'doc_transkripNilai'=> 'required|mimes:pdf|max:1024',
+                'doc_sertifikatAkreditasi'=> 'required|mimes:pdf|max:1024',
+                'doc_pangkalanData'=> 'required|mimes:pdf|max:1024',
+                'doc_skAlihtugas'=> 'required|mimes:pdf|max:1024',
+                'doc_skJF'=> 'required|mimes:pdf|max:1024',
+
+            ]);
+
+
         $dataUpload = new Form_ijazah;
         $dataUpload->user_id = Auth::id();
         $dataUpload->periode = $request->periode;
@@ -120,7 +152,9 @@ class FormPangkatIjazahController extends Controller
         $dataUpload->save();
 
         return redirect('/table-jabatan-ijazah')->with('success', 'Data baru berhasil ditambahkan!');
-
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Silahkan melengkapi data anda');
+        }
     }
 
     /**

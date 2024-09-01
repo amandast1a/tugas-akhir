@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
 <html
-  lang="en"
-  class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="{{ asset('assets/') }}/"
-  data-template="vertical-menu-template">
-  <head>
+lang="en"
+class="light-style layout-navbar-fixed layout-menu-fixed layout-compact"
+dir="ltr"
+data-theme="theme-default"
+data-assets-path="{{ asset('assets/') }}/"
+data-template="vertical-menu-template">
+<head>
     <title>Formulir usul kenaikan pangkat struktural</title>
     @include('layouts application.header')
     {{-- page css --}}
@@ -15,12 +15,12 @@
     <link rel="stylesheet" href="{{ asset('assets/') }}/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="{{ asset('assets/') }}/vendor/libs/@form-validation/umd/styles/index.min.css" />
 
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
+    <div class="layout-container">
         <!-- Menu -->
 
         @include('layouts application.sidebar')
@@ -28,14 +28,14 @@
 
         <!-- Layout container -->
         <div class="layout-page">
-          <!-- Navbar -->
+        <!-- Navbar -->
 
-          @include('layouts application.navbar')
+        @include('layouts application.navbar')
 
-          <!-- / Navbar -->
+        <!-- / Navbar -->
 
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
@@ -49,6 +49,11 @@
                             <form class="needs-validation" action="{{ route('jabatan.struktural.update', $form->id) }}" method="POST" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 @method('PUT')
+                                <div class="mb-3">
+                                    <label class="form-label" for="basic-default-message">Keterangan yang harus diperbaiki</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly
+                                    style="padding: 0.375rem 0.75rem 0.375rem 0.5rem; resize: none;">{{ $form->keterangan ?? 'Tidak ada catatan' }}</textarea>
+                                </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="periode">Pilih Periode</label>
                                     <select class="form-select" id="periode" name="periode" required>
@@ -162,17 +167,17 @@
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
+        </div>
+        <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
-      </div>
+    </div>
 
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
 
-      <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-      <div class="drag-target"></div>
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
     </div>
     <!-- / Layout wrapper -->
 
@@ -213,6 +218,52 @@
             }
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+        const formName = document.querySelector('form').getAttribute('id') || 'formStruktural';
+        const formFields = [
+            "periode", "nama", "nip", "golongan", "jabatan", "date",
+            "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_PangkatTerakhir",
+            "doc_jabatanAtasan", "doc_penilaian2022", "doc_penilaian2023",
+            "doc_jabatanLama", "doc_jabatanBaru", "doc_beritaAcarasumpahlama",
+            "doc_beritaAcarasumpahbaru", "doc_pernyataanPelantikanlama",
+            "doc_pernyataanPelantikanbaru", "doc_riwayatAtasan", "doc_ujianDinas",
+            "doc_skAlihtugas",
+
+        ];
+
+        formFields.forEach(field => {
+            const input = document.querySelector(`[name="${field}"]`);
+
+            if (input) {
+                input.value = localStorage.getItem(`${formName}_${field}`) || input.value;
+
+                input.addEventListener("input", () => {
+                    localStorage.setItem(`${formName}_${field}`, input.value);
+                });
+            }
+        });
+    });
+
+    function clearForm() {
+        const formFields = [
+            "periode", "nama", "nip", "golongan", "jabatan", "date",
+            "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_PangkatTerakhir",
+            "doc_jabatanAtasan", "doc_penilaian2022", "doc_penilaian2023",
+            "doc_jabatanLama", "doc_jabatanBaru", "doc_beritaAcarasumpahlama",
+            "doc_beritaAcarasumpahbaru", "doc_pernyataanPelantikanlama",
+            "doc_pernyataanPelantikanbaru", "doc_riwayatAtasan", "doc_ujianDinas",
+            "doc_skAlihtugas",
+
+        ];
+        formFields.forEach(field => {
+            localStorage.removeItem(`${formName}_${field}`);
+            const input = document.querySelector(`[name="${field}"]`);
+            if (input) {
+                input.value = "";
+            }
+        });
+    }
     </script>
-  </body>
+</body>
 </html>
