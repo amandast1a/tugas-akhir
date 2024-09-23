@@ -20,6 +20,8 @@ use App\Http\Controllers\GolonganController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\FormPangkatijazahController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\RulesController;
+use App\Http\Controllers\PaController;
 use Faker\Guesser\Name;
 use App\Http\Controllers\FileUploadController;
 
@@ -178,6 +180,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/form-jabatan-ijazah/show/{id}', [FormPangkatijazahController::class, 'show'])->name('jabatan.ijazah.show');
         Route::get('/table-jabatan-ijazah/search', [FormPangkatijazahController::class, 'search'])->name('jabatan.ijazah.search');
 
+       //rules
+        Route::get('/rules-pengusul', [RulesController::class, 'viewrules']);
+
     });
 
     Route::group(['middleware' => 'ceklevel:verifikator'], function () {
@@ -219,6 +224,9 @@ Route::middleware('auth')->group(function () {
 
         // pencarian form
         Route::get('/proses/search', [SearchController::class, 'searchverifikator'])->name('form.search');
+
+        //pa
+        Route::get('/pa', [PaController::class, 'viewpa']);
     });
 
 });

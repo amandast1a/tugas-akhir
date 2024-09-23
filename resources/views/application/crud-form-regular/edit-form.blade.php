@@ -311,6 +311,18 @@
                             <h5 class="card-header">Formulir usul kenaikan pangkat regular</h5>
                             <div class="card-body">
                                 <form class="needs-validation" action="{{ route('jabatan.regular.update', $form->id) }}" method="POST" enctype="multipart/form-data" novalidate>
+                                    @if (session('error'))
+                                            <div>
+                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                <script>
+                                                    Swal.fire({
+                                                        title: "Error",
+                                                        text: "{{ session('error') }}",
+                                                        icon: "error"
+                                                    });
+                                                </script>
+                                            </div>
+                                        @endif
                                     @csrf
                                     @method('PUT')
                                     <div class="mb-3">
@@ -476,6 +488,49 @@
                 }
                 });
             });
+
+            document.addEventListener("DOMContentLoaded", function() {
+            const formName = document.querySelector('form').getAttribute('id') || 'formReguler';
+            const formFields = [
+                "periode", "nama", "nip", "golongan", "jabatan", "date",
+                "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_PangkatTerakhir",
+                "doc_jabatanAtasan", "doc_tandaLulus", "doc_skAhlitugas", "doc_penilaian2022",
+                "doc_penilaian2023", "doc_skCpns", "doc_skPns", "doc_STTPL",
+                "doc_beritaAcarasumpah", "doc_ijazah", "doc_transkrip",
+
+            ];
+
+            formFields.forEach(field => {
+                const input = document.querySelector(`[name="${field}"]`);
+
+                if (input) {
+                    input.value = localStorage.getItem(`${formName}_${field}`) || input.value;
+
+                    input.addEventListener("input", () => {
+                        localStorage.setItem(`${formName}_${field}`, input.value);
+                    });
+                }
+            });
+        });
+
+        function clearForm() {
+            const formName = document.querySelector('form').getAttribute('id') || 'formReguler';
+            const formFields = [
+                "periode", "nama", "nip", "golongan", "jabatan", "date",
+                "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_PangkatTerakhir",
+                "doc_jabatanAtasan", "doc_tandaLulus", "doc_skAhlitugas", "doc_penilaian2022",
+                "doc_penilaian2023", "doc_skCpns", "doc_skPns", "doc_STTPL",
+                "doc_beritaAcarasumpah", "doc_ijazah", "doc_transkrip",
+            ];
+
+            formFields.forEach(field => {
+                localStorage.removeItem(`${formName}_${field}`);
+                const input = document.querySelector(`[name="${field}"]`);
+                if (input) {
+                    input.value = "";
+                }
+            });
+        }
         </script>
     </body>
     </html>

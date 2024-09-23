@@ -223,10 +223,8 @@
             <button type="button" class="btn btn-secondary" onclick="clearForm()">Reset</button>
         </div>
     </div>
+    
     </form>
-    </div>
-    </div>
-    </div>
     </div>
 
 
@@ -316,6 +314,7 @@
         });
 
         function clearForm() {
+            const formName = document.querySelector('form').getAttribute('id') || 'formReguler';
             const formFields = [
                 "periode", "nama", "nip", "golongan", "jabatan", "date",
                 "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_PangkatTerakhir",

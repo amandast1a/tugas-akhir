@@ -75,11 +75,7 @@
                     <div data-i18n="SKPD">SKPD</div>
                     </a>
                 </li>
-                <li class="menu-item {{ Request::is('dinas') ? 'active' : '' }}">
-                    <a href="/dinas" class="menu-link" >
-                    <div data-i18n="Dinas">Dinas</div>
-                    </a>
-                </li>
+                
             </ul>
       </li>
 

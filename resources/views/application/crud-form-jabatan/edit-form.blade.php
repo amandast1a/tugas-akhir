@@ -47,6 +47,18 @@
                         <h5 class="card-header">Formulir usul kenaikan pangkat fungsional</h5>
                         <div class="card-body">
                             <form class="needs-validation" action="{{ route('jabatan.fungsional.update', $form->id) }}" method="POST" enctype="multipart/form-data" novalidate>
+                                @if (session('error'))
+                                            <div>
+                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                <script>
+                                                    Swal.fire({
+                                                        title: "Error",
+                                                        text: "{{ session('error') }}",
+                                                        icon: "error"
+                                                    });
+                                                </script>
+                                            </div>
+                                        @endif
                                 @csrf
                                 @method('PUT')
                                 <div class="mb-3">
@@ -241,6 +253,7 @@
         });
 
         function clearForm() {
+            const formName = document.querySelector('form').getAttribute('id') || 'formFungsional';
             const formFields = [
                 "periode", "nama", "nip", "golongan", "jabatan", "date",
                 "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_skPangkat",

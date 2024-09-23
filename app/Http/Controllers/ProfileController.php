@@ -32,6 +32,7 @@ class ProfileController extends Controller
         return view('verifikator.profile.profile', compact('user'));
     }
 
+
     public function storeSuperadmin(Request $request)
     {
         $dataUpload = User::findOrFail(Auth::user()->id);

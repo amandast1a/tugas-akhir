@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{ asset('assets/') }}/vendor/libs/select2/select2.css" />
     <link rel="stylesheet"
         href="{{ asset('assets/') }}/vendor/libs/@form-validation/umd/styles/index.min.css" />
-
     </head>
 
     <body>
@@ -48,6 +47,18 @@
                             3. Upload file maksimal 1 Mb dalam bentuk PDF</h6>
                         <div class="card-body">
                             <form action="{{ route('jabatan.ijazah.post') }}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                                @if (session('error'))
+                                            <div>
+                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                <script>
+                                                    Swal.fire({
+                                                        title: "Error",
+                                                        text: "{{ session('error') }}",
+                                                        icon: "error"
+                                                    });
+                                                </script>
+                                            </div>
+                                        @endif
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label" for="bs-validation-country">Pilih Periode</label>
@@ -60,7 +71,8 @@
                                             <option value="{{ $periode->periode }}">{{ $periode->periode }}</option>
                                         @endif @endforeach
                                 </select>
-                                <div class="valid-feedback">Terisi</div>
+                                <div class="valid-feedback">
+    Terisi</div>
     <div class="invalid-feedback">Silahkan pilih periode</div>
     </div>
     <div class="mb-3">
@@ -122,180 +134,199 @@
     </div>
     <div class="mb-3">
         <label class="form-label" for="bs-validation-upload-suratPengantar">SURAT PENGANTAR (dari Kepala SKPD) file max
-            1MB</label>
+            1MB <span class="text-danger">*</span>
+        </label>
         <input type="file" class="form-control" id="bs-validation-upload-suratPengantar" name="doc_suratPengantar"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_suratPengantar')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-pangkatTerakhir">SK PANGKAT TERAKHIR</label>
+        <label class="form-label" for="bs-validation-upload-pangkatTerakhir">
+            SK PANGKAT TERAKHIR <span class="text-danger">*</span>
+        </label>
         <input type="file" class="form-control" id="bs-validation-upload-pangkatTerakhir" name="doc_pangkatTerakhir"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_pangkatTerakhir')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-jabatanAtasan">SK JABATAN ATASAN LANGSUNG</label>
+        <label class="form-label" for="bs-validation-upload-jabatanAtasan">SK JABATAN ATASAN LANGSUNG <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-jabatanAtasan" name="doc_jabatanAtasan"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_jabatanAtasan')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-penilaian2022">PENILAIAN KINERJA 2022</label>
+        <label class="form-label" for="bs-validation-upload-penilaian2022">PENILAIAN KINERJA 2022 <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-penilaian2022" name="doc_penilaian2022"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_penilaian2022')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-penilaian2023">PENILAIAN KINERJA 2023</label>
+        <label class="form-label" for="bs-validation-upload-penilaian2023">PENILAIAN KINERJA 2023 <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-penilaian2023" name="doc_penilaian2023"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_penilaian2023')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-pakKonvensional">PAK KONVENSIONAL</label>
+        <label class="form-label" for="bs-validation-upload-pakKonvensional">PAK KONVENSIONAL <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-pakKonvensional"
             name="doc_pakKonvensional" accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error>Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_pakKonvensional')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-pakIntegrasi">PAK INTEGRASI</label>
+        <label class="form-label" for="bs-validation-upload-pakIntegrasi">PAK INTEGRASI <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-pakIntegrasi" name="doc_pakIntegrasi"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_pakIntegrasi')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-pakKonversi">PAK KONVERSI</label>
+        <label class="form-label" for="bs-validation-upload-pakKonversi">PAK KONVERSI <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-pakKonversi" name="doc_pakKonversi"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_pakKonversi')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-ujiKopetensi">SERTIFIKAT UJI KOMPETENSI</label>
+        <label class="form-label" for="bs-validation-upload-ujiKopetensi">SERTIFIKAT UJI KOMPETENSI <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-ujiKopetensi" name="doc_ujiKopetensi"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_ujiKopetensi')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-izinBelajar">IZIN BELAJAR</label>
+        <label class="form-label" for="bs-validation-upload-izinBelajar">IZIN BELAJAR <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-izinBelajar" name="doc_izinBelajar"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_izinBelajar')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-uraianTugaslama">URAIAN TUGAS LAMA</label>
+        <label class="form-label" for="bs-validation-upload-uraianTugaslama">URAIAN TUGAS LAMA <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-uraianTugaslama"
             name="doc_uraianTugaslama" accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_uraianTugaslama')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-uraianTugasbaru">URAIAN TUGAS BARU</label>
+        <label class="form-label" for="bs-validation-upload-uraianTugasbaru">URAIAN TUGAS BARU <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-uraianTugasbaru"
             name="doc_uraianTugasbaru" accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_uraianTugasbaru')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-suratTandakelulusan">SURAT TANDA KELULUSAN</label>
+        <label class="form-label" for="bs-validation-upload-suratTandakelulusan">SURAT TANDA KELULUSAN <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-suratTandakelulusan"
             name="doc_suratTandakelulusan" accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_suratTandakelulusan')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-ijazah">IJAZAH</label>
+        <label class="form-label" for="bs-validation-upload-ijazah">IJAZAH <span class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-ijazah" name="doc_ijazah"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_ijazah')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-transkripNilai">TRANSKRIP NILAI</label>
+        <label class="form-label" for="bs-validation-upload-transkripNilai">TRANSKRIP NILAI <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-transkripNilai"
             name="doc_transkripNilai" accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_transkripNilai')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-sertifikatAkreditasi">SERTIFIKAT AKREDITASI</label>
+        <label class="form-label" for="bs-validation-upload-sertifikatAkreditasi">SERTIFIKAT AKREDITASI <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-sertifikatAkreditasi"
             name="doc_sertifikatAkreditasi" accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_sertifikatAkreditasi')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-pangkalanData">PANGKALAN DATA PENDIDIKAN TINGGI</label>
+        <label class="form-label" for="bs-validation-upload-pangkalanData">PANGKALAN DATA PENDIDIKAN TINGGI <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-pangkalanData" name="doc_pangkalanData"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_pangkalanData')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-skAlihtugas">SK ALIH TUGAS</label>
+        <label class="form-label" for="bs-validation-upload-skAlihtugas">SK ALIH TUGAS <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-skAlihtugas" name="doc_skAlihtugas"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_skAlihtugas')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="mb-3">
-        <label class="form-label" for="bs-validation-upload-skJF">SK JABATAN FUNGSIONAL</label>
+        <label class="form-label" for="bs-validation-upload-skJF">SK JABATAN FUNGSIONAL <span
+                class="text-danger">*</span></label>
         <input type="file" class="form-control" id="bs-validation-upload-skJF" name="doc_skJF"
             accept="application/pdf" required />
-        <div class="invalid-feedback">Silahkan unggah file PDF maksimal 1MB</div>
+        <div class="invalid-feedback" id="file-error">Silahkan unggah file PDF maksimal 1MB</div>
         @error('doc_skJF')
-        {{ $message }}
+            {{ $message }}
         @enderror
     </div>
     <div class="row">
         <div class="col-12">
             <button type="submit" class="btn btn-primary submit">Submit</button>
-            <button type="button" class="btn btn-secondary" onclick="clearForm()">Reset</button>
+            <button type="button" class="btn btn-danger" onclick="clearForm()">Reset</button>
         </div>
     </div>
 
@@ -417,7 +448,6 @@
 
         function clearForm() {
             const formName = document.querySelector('form').getAttribute('id') || 'defaultForm';
-
             const formFields = [
                 "periode", "nama", "nip", "golongan", "jabatan", "date",
                 "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_pangkatTerakhir",
@@ -442,6 +472,637 @@
                 input.value = "";
             });
         }
+    </script>
+    <script>
+        document.getElementById('bs-validation-upload-pangkatTerakhir').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-jabatanAtasan').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-penilaian2022').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-penilaian2023').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-pakKonvensional').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-pakIntegrasi').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-pakKonversi').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-ujiKopetensi').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-izinBelajar').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-uraianTugaslama').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-uraianTugasbaru').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-suratTandakelulusan').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-ijazah').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-transkripNilai').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-sertifikatAkreditasi').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-pangkalanData').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-skAlihtugas').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
+        document.getElementById('bs-validation-upload-skJF').addEventListener('input', function() {
+            var input = this;
+            var feedback = input.nextElementSibling;
+
+            var file = input.files[0];
+
+            feedback.textContent = "Silahkan unggah file PDF maksimal 1MB";
+            input.classList.remove('is-invalid');
+
+            if (file) {
+                // Cek ukuran file (maksimal 1MB)
+                var maxSize = 1 * 1024 * 1024; // 1MB dalam byte
+                if (file.size > maxSize) {
+                    feedback.textContent = "File terlalu besar, maksimal 1MB.";
+                    input.classList.add('is-invalid');
+                    return;
+                }
+
+                // Cek tipe file apakah PDF
+                if (file.type !== 'application/pdf') {
+                    feedback.textContent = "Format file salah, harap unggah file PDF.";
+                    input.classList.add('is-invalid');
+                }
+            } else {
+                // Jika tidak ada file yang di-upload
+                input.classList.add('is-invalid');
+                feedback.textContent = "File wajib diunggah.";
+            }
+
+            if (input.files.length > 0) {
+                input.classList.remove('is-invalid');
+            } else {
+                input.classList.add('is-invalid');
+            }
+        });
     </script>
     </body>
 

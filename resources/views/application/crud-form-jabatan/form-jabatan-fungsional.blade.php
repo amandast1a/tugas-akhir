@@ -48,7 +48,20 @@
                         3. upload file maksimal 1 Mb dalam bentuk PDF</h6>
                     <div class="card-body">
                         <form action="{{ route('jabatan.fungsional.post') }}" id="formFungsional" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            @if (session('error'))
+                                            <div>
+                                                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                                <script>
+                                                    Swal.fire({
+                                                        title: "Error",
+                                                        text: "{{ session('error') }}",
+                                                        icon: "error"
+                                                    });
+                                                </script>
+                                            </div>
+                                        @endif
                             @csrf
+                            
                             <div class="mb-3">
                                 <label class="form-label" for="bs-validation-country">Pilih Periode</label>
                                 <select class="form-select" id="bs-validation-country" name="periode" required>
@@ -334,6 +347,7 @@
         });
 
         function clearForm() {
+            const formName = document.querySelector('form').getAttribute('id') || 'formFungsional';
             const formFields = [
                 "periode", "nama", "nip", "golongan", "jabatan", "date",
                 "unit_kerja", "nomor_wa", "doc_suratPengantar", "doc_skPangkat",
