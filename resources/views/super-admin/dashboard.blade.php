@@ -90,7 +90,7 @@
                                   <div id="revenueGenerated"></div>
                                 </div>
                               </div>
-                              
+
                             {{-- documen fung --}}
                             <div id="statistic" class="col-lg-12 mb-4 col-md-12">
                                 <div class="card h-100">
@@ -491,7 +491,7 @@
                                         <td><span class="badge
                                     @if ($item->status == 'Pending') bg-label-warning
                                         @elseif($item->status == 'Ditolak') bg-label-danger
-                                        @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                        @elseif($item->status == 'Berhasil') bg-label-success
                                         @elseif($item->status == 'Perbaikan') bg-label-dark
                                         @endif
                                     me-1">{{ $item->status }}</span>

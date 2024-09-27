@@ -28,7 +28,7 @@
         <li class="menu-item {{ Request::is('rules-pengusul') ? 'active' : '' }}">
             <a href="/rules-pengusul" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-file-alert"></i>
-                <div data-i18n="Rules">Rules</div>
+                <div data-i18n="Peraturan Terkait">Peraturan Terkait</div>
             </a>
         </li>
         <li class="menu-item {{ Request::is('notifikasi-pengusul') ? 'active' : '' }}">

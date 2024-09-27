@@ -227,6 +227,7 @@ Route::middleware('auth')->group(function () {
 
         //pa
         Route::get('/pa', [PaController::class, 'viewpa']);
+        Route::post('/cetak-pdf', [PaController::class, 'cetakPDF'])->name('cetak.pdf');
     });
 
 });

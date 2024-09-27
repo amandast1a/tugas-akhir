@@ -59,7 +59,7 @@
                                     <label class="form-label" for="bs-validation-status">Status</label>
                                     <input type="text" class="form-control
                                     @if($notification->status == 'Pending') bg-warning text-white
-                                    @elseif($notification->status == 'Pembuatan_SK_Berhasil') bg-success text-white
+                                    @elseif($notification->status == 'Berhasil') bg-success text-white
                                     @elseif($notification->status == 'Ditolak') bg-danger text-white
                                     @elseif($notification->status == 'Perbaikan') bg-dark text-white
                                     @endif"
@@ -108,7 +108,7 @@
                                     <label class="form-label" for="bs-validation-status">Status</label>
                                     <input type="text" class="form-control
                                     @if($notification->status == 'Pending') bg-warning text-white
-                                    @elseif($notification->status == 'Pembuatan_SK_Berhasil') bg-success text-white
+                                    @elseif($notification->status == 'Berhasil') bg-success text-white
                                     @elseif($notification->status == 'Ditolak') bg-danger text-white
                                     @endif"
                                     id="bs-validation-status"
@@ -156,7 +156,7 @@
                                     <label class="form-label" for="bs-validation-status">Status</label>
                                     <input type="text" class="form-control
                                     @if($notification->status == 'Pending') bg-warning text-white
-                                    @elseif($notification->status == 'Pembuatan_SK_Berhasil') bg-success text-white
+                                    @elseif($notification->status == 'Berhasil') bg-success text-white
                                     @elseif($notification->status == 'Ditolak') bg-danger text-white
                                     @endif"
                                     id="bs-validation-status"
@@ -204,7 +204,7 @@
                                     <label class="form-label" for="bs-validation-status">Status</label>
                                     <input type="text" class="form-control
                                     @if($notification->status == 'Pending') bg-warning text-white
-                                    @elseif($notification->status == 'Pembuatan_SK_Berhasil') bg-success text-white
+                                    @elseif($notification->status == 'Berhasil') bg-success text-white
                                     @elseif($notification->status == 'Ditolak') bg-danger text-white
                                     @endif"
                                     id="bs-validation-status"

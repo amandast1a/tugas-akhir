@@ -25,28 +25,28 @@ class DashboardController extends Controller
         $Form_jabatan_fungsional = Form_jabatan_fungsional::latest('updated_at')->first();
         $jumlahpengusul = Form_jabatan_fungsional::count();
         $pendingstatus = Form_jabatan_fungsional::where('status', 'Pending')->count();
-        $berhasilstatus = Form_jabatan_fungsional::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatus = Form_jabatan_fungsional::where('status', 'Berhasil')->count();
         $gagalstatus = Form_jabatan_fungsional::where('status', 'Ditolak')->count();
         $perbaikanstatus = Form_jabatan_fungsional::where('status', 'Perbaikan')->count();
 
         $Form_regular = Form_regular::latest('updated_at')->first();
         $jumlahpengusulregular = Form_regular::count();
         $pendingstatusregular = Form_regular::where('status', 'Pending')->count();
-        $berhasilstatusregular = Form_regular::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusregular = Form_regular::where('status', 'Berhasil')->count();
         $gagalstatusregular = Form_regular::where('status', 'Ditolak')->count();
         $perbaikanstatusregular = Form_regular::where('status', 'Perbaikan')->count();
 
         $Form_struktural = Form_struktural::latest('updated_at')->first();
         $jumlahpengusulstruktural = Form_struktural::count();
         $pendingstatusstruktural = Form_struktural::where('status', 'Pending')->count();
-        $berhasilstatusstruktural = Form_struktural::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusstruktural = Form_struktural::where('status', 'Berhasil')->count();
         $gagalstatusstruktural = Form_struktural::where('status', 'Ditolak')->count();
         $perbaikanstatusstruktural = Form_struktural::where('status', 'Perbaikan')->count();
 
         $Form_ijazah = Form_ijazah::latest('updated_at')->first();
         $jumlahpengusulijazah = Form_ijazah::count();
         $pendingstatusijazah = Form_ijazah::where('status', 'Pending')->count();
-        $berhasilstatusijazah = Form_ijazah::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusijazah = Form_ijazah::where('status', 'Berhasil')->count();
         $gagalstatusijazah = Form_ijazah::where('status', 'Ditolak')->count();
         $perbaikanstatusijazah = Form_ijazah::where('status', 'Perbaikan')->count();
         return view('application.dashboard',
@@ -91,28 +91,28 @@ class DashboardController extends Controller
         $Form_jabatan_fungsional = Form_jabatan_fungsional::latest('updated_at')->first();
         $jumlahpengusul = Form_jabatan_fungsional::count();
         $pendingstatus = Form_jabatan_fungsional::where('status', 'Pending')->count();
-        $berhasilstatus = Form_jabatan_fungsional::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatus = Form_jabatan_fungsional::where('status', 'Berhasil')->count();
         $gagalstatus = Form_jabatan_fungsional::where('status', 'Ditolak')->count();
         $perbaikanstatus = Form_jabatan_fungsional::where('status', 'Perbaikan')->count();
 
         $Form_regular = Form_regular::latest('updated_at')->first();
         $jumlahpengusulregular = Form_regular::count();
         $pendingstatusregular = Form_regular::where('status', 'Pending')->count();
-        $berhasilstatusregular = Form_regular::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusregular = Form_regular::where('status', 'Berhasil')->count();
         $gagalstatusregular = Form_regular::where('status', 'Ditolak')->count();
         $perbaikanstatusregular = Form_regular::where('status', 'Perbaikan')->count();
 
         $Form_struktural = Form_struktural::latest('updated_at')->first();
         $jumlahpengusulstruktural = Form_struktural::count();
         $pendingstatusstruktural = Form_struktural::where('status', 'Pending')->count();
-        $berhasilstatusstruktural = Form_struktural::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusstruktural = Form_struktural::where('status', 'Berhasil')->count();
         $gagalstatusstruktural = Form_struktural::where('status', 'Ditolak')->count();
         $perbaikanstatusstruktural = Form_struktural::where('status', 'Perbaikan')->count();
 
         $Form_ijazah = Form_ijazah::latest('updated_at')->first();
         $jumlahpengusulijazah = Form_ijazah::count();
         $pendingstatusijazah = Form_ijazah::where('status', 'Pending')->count();
-        $berhasilstatusijazah = Form_ijazah::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusijazah = Form_ijazah::where('status', 'Berhasil')->count();
         $gagalstatusijazah = Form_ijazah::where('status', 'Ditolak')->count();
         $perbaikanstatusijazah = Form_ijazah::where('status', 'Perbaikan')->count();
         return view('super-admin.dashboard',
@@ -156,28 +156,28 @@ class DashboardController extends Controller
         $Form_jabatan_fungsional = Form_jabatan_fungsional::latest('updated_at')->first();
         $jumlahpengusul = Form_jabatan_fungsional::count();
         $pendingstatus = Form_jabatan_fungsional::where('status', 'Pending')->count();
-        $berhasilstatus = Form_jabatan_fungsional::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatus = Form_jabatan_fungsional::where('status', 'Berhasil')->count();
         $gagalstatus = Form_jabatan_fungsional::where('status', 'Ditolak')->count();
         $perbaikanstatus = Form_jabatan_fungsional::where('status', 'Perbaikan')->count();
 
         $Form_regular = Form_regular::latest('updated_at')->first();
         $jumlahpengusulregular = Form_regular::count();
         $pendingstatusregular = Form_regular::where('status', 'Pending')->count();
-        $berhasilstatusregular = Form_regular::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusregular = Form_regular::where('status', 'Berhasil')->count();
         $gagalstatusregular = Form_regular::where('status', 'Ditolak')->count();
         $perbaikanstatusregular = Form_regular::where('status', 'Perbaikan')->count();
 
         $Form_struktural = Form_struktural::latest('updated_at')->first();
         $jumlahpengusulstruktural = Form_struktural::count();
         $pendingstatusstruktural = Form_struktural::where('status', 'Pending')->count();
-        $berhasilstatusstruktural = Form_struktural::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusstruktural = Form_struktural::where('status', 'Berhasil')->count();
         $gagalstatusstruktural = Form_struktural::where('status', 'Ditolak')->count();
         $perbaikanstatusstruktural = Form_struktural::where('status', 'Perbaikan')->count();
 
         $Form_ijazah = Form_ijazah::latest('updated_at')->first();
         $jumlahpengusulijazah = Form_ijazah::count();
         $pendingstatusijazah = Form_ijazah::where('status', 'Pending')->count();
-        $berhasilstatusijazah = Form_ijazah::where('status', 'Pembuatan_SK_Berhasil')->count();
+        $berhasilstatusijazah = Form_ijazah::where('status', 'Berhasil')->count();
         $gagalstatusijazah = Form_ijazah::where('status', 'Ditolak')->count();
         $perbaikanstatusijazah = Form_ijazah::where('status', 'Perbaikan')->count();
         return view('verifikator.dashboard',

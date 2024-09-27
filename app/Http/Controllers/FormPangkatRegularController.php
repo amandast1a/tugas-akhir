@@ -262,11 +262,11 @@ class FormPangkatRegularController extends Controller
         $updated = $data_update->update($updateData);
 
         if ($updated) {
-            if ($validated['status'] == 'Pembuatan_SK_Berhasil') {
+            if ($validated['status'] == 'Berhasil') {
                 Notification::create([
                     'user_id' => $data_update->user_id,
                     'form_regulars_id' => $data_update->id,
-                    'status' => 'Pembuatan_SK_Berhasil',
+                    'status' => 'Berhasil',
                     'type' => 'formulir usulan kenaikan pangkat jabatan regular',
                     'data' => 'Dokumen Anda telah berhasil diverifikasi.',
                 ]);

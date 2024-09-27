@@ -160,7 +160,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -217,7 +217,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -262,7 +262,7 @@
                                     </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @foreach ($results->where('status', 'Pembuatan_SK_Berhasil') as $item)
+                                        @foreach ($results->where('status', 'Berhasil') as $item)
                                         <tr>
                                             <td>{{ $item->user->nama }}</td>
                                             <td>{{ $item->nama }}</td>
@@ -270,7 +270,7 @@
                                             <td><span class="badge
                                         @if($item->status == 'Pending') bg-label-warning
                                             @elseif($item->status == 'Ditolak') bg-label-danger
-                                            @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                            @elseif($item->status == 'Berhasil') bg-label-success
                                             @elseif($item->status == 'Perbaikan') bg-label-dark
                                             @endif
                                         me-1">{{ $item->status }}</span>
@@ -322,7 +322,7 @@
                                                     <td><span class="badge
                                                 @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                 me-1">{{ $item->status }}</span>
@@ -478,7 +478,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -535,7 +535,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -580,7 +580,7 @@
                                     </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @foreach ($results->where('status', 'Pembuatan_SK_Berhasil') as $item)
+                                        @foreach ($results->where('status', 'Berhasil') as $item)
                                         <tr>
                                             <td>{{ $item->user->nama }}</td>
                                             <td>{{ $item->nama }}</td>
@@ -588,7 +588,7 @@
                                             <td><span class="badge
                                         @if($item->status == 'Pending') bg-label-warning
                                             @elseif($item->status == 'Ditolak') bg-label-danger
-                                            @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                            @elseif($item->status == 'Berhasil') bg-label-success
                                             @elseif($item->status == 'Perbaikan') bg-label-dark
                                             @endif
                                         me-1">{{ $item->status }}</span>
@@ -640,7 +640,7 @@
                                                     <td><span class="badge
                                                 @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                 me-1">{{ $item->status }}</span>
@@ -796,7 +796,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -853,7 +853,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -898,7 +898,7 @@
                                     </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @foreach ($results->where('status', 'Pembuatan_SK_Berhasil') as $item)
+                                        @foreach ($results->where('status', 'Berhasil') as $item)
                                         <tr>
                                             <td>{{ $item->user->nama }}</td>
                                             <td>{{ $item->nama }}</td>
@@ -906,7 +906,7 @@
                                             <td><span class="badge
                                         @if($item->status == 'Pending') bg-label-warning
                                             @elseif($item->status == 'Ditolak') bg-label-danger
-                                            @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                            @elseif($item->status == 'Berhasil') bg-label-success
                                             @elseif($item->status == 'Perbaikan') bg-label-dark
                                             @endif
                                         me-1">{{ $item->status }}</span>
@@ -958,7 +958,7 @@
                                                     <td><span class="badge
                                                 @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                 me-1">{{ $item->status }}</span>
@@ -1114,7 +1114,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -1171,7 +1171,7 @@
                                                 <td><span class="badge
                                                     @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                     me-1">{{ $item->status }}</span>
@@ -1216,7 +1216,7 @@
                                     </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @foreach ($results->where('status', 'Pembuatan_SK_Berhasil') as $item)
+                                        @foreach ($results->where('status', 'Berhasil') as $item)
                                         <tr>
                                             <td>{{ $item->user->nama }}</td>
                                             <td>{{ $item->nama }}</td>
@@ -1224,7 +1224,7 @@
                                             <td><span class="badge
                                         @if($item->status == 'Pending') bg-label-warning
                                             @elseif($item->status == 'Ditolak') bg-label-danger
-                                            @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                            @elseif($item->status == 'Berhasil') bg-label-success
                                             @elseif($item->status == 'Perbaikan') bg-label-dark
                                             @endif
                                         me-1">{{ $item->status }}</span>
@@ -1276,7 +1276,7 @@
                                                     <td><span class="badge
                                                 @if($item->status == 'Pending') bg-label-warning
                                                     @elseif($item->status == 'Ditolak') bg-label-danger
-                                                    @elseif($item->status == 'Pembuatan_SK_Berhasil') bg-label-success
+                                                    @elseif($item->status == 'Berhasil') bg-label-success
                                                     @elseif($item->status == 'Perbaikan') bg-label-dark
                                                     @endif
                                                 me-1">{{ $item->status }}</span>

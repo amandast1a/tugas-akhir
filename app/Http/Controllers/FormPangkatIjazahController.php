@@ -78,12 +78,11 @@ class FormPangkatIjazahController extends Controller
 
         try {
             $request->validate([
-                'nama' => 'required|string',
-                'nip' => 'required|integer',
-                'jabatan' => 'required|string',
-                'unit_kerja' => 'required|string',
-                'nomor_wa' => 'required|string',
-                'doc_suratPengantar' => 'required|mimes:pdf|max:1024',
+                // 'nama' => 'required|string',
+                // 'nip' => 'required|integer',
+                // 'jabatan' => 'required|string',
+                // 'unit_kerja' => 'required|string',
+                // 'nomor_wa' => 'required|string',
                 'doc_suratPengantar' => 'required|mimes:pdf|max:1024',
                 'doc_pangkatTerakhir' => 'required|mimes:pdf|max:1024',
                 'doc_jabatanAtasan' => 'required|mimes:pdf|max:1024',
@@ -216,11 +215,11 @@ class FormPangkatIjazahController extends Controller
         $updated = $data_update->update($updateData);
 
         if ($updated) {
-            if ($validated['status'] == 'Pembuatan_SK_Berhasil') {
+            if ($validated['status'] == 'Berhasil') {
                 Notification::create([
                     'user_id' => $data_update->user_id,
                     'form_ijazahs_id' => $data_update->id,
-                    'status' => 'Pembuatan_SK_Berhasil',
+                    'status' => 'Berhasil',
                     'type' => 'formulir usulan kenaikan pangkat jabatan ijazah',
                     'data' => 'Dokumen Anda telah berhasil diverifikasi.',
                 ]);
